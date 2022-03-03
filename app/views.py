@@ -28,6 +28,13 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/secure-page')
+@login_required
+def secure_page():
+    """Render a secure page on our website that only logged in users can access."""
+    return render_template('secure_page.html')
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
@@ -60,6 +67,7 @@ def login():
             else:
                 flash('Username or Password is incorrect', 'danger')
     return render_template("login.html", form=form)
+
 
 
 # user_loader callback. This callback is used to reload the user object from
